@@ -85,12 +85,6 @@ backend 127.0.0.1:9002
 nc 127.0.0.1 8080          # reply is tagged with which backend served you
 ```
 
-## Design
-
-See [`docs/architecture.md`](docs/architecture.md) for the component breakdown
-and connection lifecycle, and [`docs/decisions.md`](docs/decisions.md) for the
-rationale behind the L4 / single-thread / kqueue choices.
-
 ## Requirements
 
 - A C11 compiler (Apple clang or gcc)
