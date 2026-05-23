@@ -26,28 +26,6 @@ This produces binaries in `build/`:
 The poller backend is chosen automatically: `epoll` on Linux, `kqueue` on
 macOS/BSD.
 
-## Tests
-
-```bash
-# concurrency: open N simultaneous connections, verify each round-trips
-./tests/smoke_test.sh 100
-
-# distribution: see which backend serves each of N simultaneous connections
-./build/echo_backend 9001 & ./build/echo_backend 9002 & ./build/echo_backend 9003 &
-./build/lb 8080 127.0.0.1:9001 127.0.0.1:9002 127.0.0.1:9003 &
-./build/distribution_probe 127.0.0.1 8080 30
-```
-
-The kqueue (macOS) path is exercised by the above. The `epoll` (Linux) backend
-shares all logic above the `poller.h` interface; to validate it, build and run
-the same tests on Linux (e.g. a container):
-
-```bash
-docker run --rm -it -v "$PWD":/src -w /src gcc:14 \
-  bash -lc 'apt-get update && apt-get install -y cmake && \
-            cmake -S . -B build && cmake --build build && ./tests/smoke_test.sh 100'
-```
-
 ## Usage
 
 ```
