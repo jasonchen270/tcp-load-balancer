@@ -10,6 +10,13 @@ The focus is low-level systems programming: BSD sockets, non-blocking I/O, and
 an event loop over `kqueue` (macOS/BSD), with an `epoll` (Linux) backend behind
 the same interface.
 
+## Requirements
+
+- A C11 compiler (Apple clang or gcc)
+- CMake ≥ 3.20
+- macOS/BSD (`kqueue` backend) or Linux (`epoll` backend), selected
+  automatically at build time
+
 ## Build
 
 ```bash
@@ -49,10 +56,3 @@ idle-timeout 60
 backend 127.0.0.1:9001
 backend 127.0.0.1:9002
 ```
-
-## Requirements
-
-- A C11 compiler (Apple clang or gcc)
-- CMake ≥ 3.20
-- macOS/BSD (`kqueue` backend) or Linux (`epoll` backend), selected
-  automatically at build time
