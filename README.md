@@ -50,26 +50,9 @@ backend 127.0.0.1:9001
 backend 127.0.0.1:9002
 ```
 
-## Try it
-
-```bash
-# start three backends
-./build/echo_backend 9001 & ./build/echo_backend 9002 & ./build/echo_backend 9003 &
-
-# run lb in front of them
-./build/lb 8080 127.0.0.1:9001 127.0.0.1:9002 127.0.0.1:9003
-
-# in another terminal, each connection is sent to a backend by the policy:
-nc 127.0.0.1 8080          # reply is tagged with which backend served you
-```
-
 ## Requirements
 
 - A C11 compiler (Apple clang or gcc)
 - CMake ≥ 3.20
 - macOS/BSD (`kqueue` backend) or Linux (`epoll` backend), selected
   automatically at build time
-
-## License
-
-MIT. See [LICENSE](LICENSE).
