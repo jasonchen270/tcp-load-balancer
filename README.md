@@ -1,23 +1,14 @@
 # tcp-load-balancer
 
-A single-threaded, event-driven **Layer-4 (TCP) load balancer** written in C,
-built from raw sockets. It accepts client connections, selects a backend by a
-configurable policy, splices bytes in both directions, and ejects dead backends
-via health checks. This is the core model behind nginx and HAProxy, implemented from
-scratch.
+A single-threaded, event-driven Layer-4 (TCP) load balancer written in C from raw BSD sockets, using an event loop over `kqueue` (macOS/BSD) with an `epoll` (Linux) backend behind the same interface. It accepts client connections, selects a backend by a configurable policy, splices bytes in both directions, and ejects dead backends via health checks, the core model behind nginx and HAProxy implemented from scratch.
 
-The focus is low-level systems programming: BSD sockets, non-blocking I/O, and
-an event loop over `kqueue` (macOS/BSD), with an `epoll` (Linux) backend behind
-the same interface.
-
-## Requirements
+## Prerequisites
 
 - A C11 compiler (Apple clang or gcc)
 - CMake ≥ 3.20
-- macOS/BSD (`kqueue` backend) or Linux (`epoll` backend), selected
-  automatically at build time
+- macOS/BSD (`kqueue` backend) or Linux (`epoll` backend), selected automatically at build time
 
-## Build
+## Installation
 
 ```bash
 cmake -S . -B build
@@ -30,8 +21,7 @@ This produces binaries in `build/`:
 - `echo_backend`: a trivial TCP echo server used as a test backend.
 - `concurrent_client`, `distribution_probe`: test tools.
 
-The poller backend is chosen automatically: `epoll` on Linux, `kqueue` on
-macOS/BSD.
+The poller backend is chosen automatically: `epoll` on Linux, `kqueue` on macOS/BSD.
 
 ## Usage
 
